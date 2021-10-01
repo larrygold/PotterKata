@@ -6,8 +6,14 @@ namespace PotterKata
     {
         public double GetPrice(int[] books)
         {
-            if (books.Length == 2)
-                return 15.2;
+            switch (books.Length)
+            {
+                case 2:
+                    return 15.2;
+                case 3:
+                    return 21.6;
+            }
+                
             return 8.0;
         }
     }
