@@ -27,10 +27,10 @@ namespace PotterKata
                 return 4 * discountFactorPerNumberOfDistinctBooks[4] * UnitPrice + 1 * UnitPrice;
 
             if ((books.Distinct().Count() == 2) && (books.Length == 4))
-                return 3 * 0.90 * UnitPrice + 1 * UnitPrice;
+                return 3 * discountFactorPerNumberOfDistinctBooks[3] * UnitPrice + 1 * UnitPrice;
 
             if ((books.Distinct().Count() == 2) && (books.Length == 3))
-                return 2 * 0.95 * UnitPrice + 1 * UnitPrice;
+                return 2 * discountFactorPerNumberOfDistinctBooks[2] * UnitPrice + 1 * UnitPrice;
 
 
             switch (books.Length)
