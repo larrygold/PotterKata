@@ -14,7 +14,7 @@ namespace PotterKata
 
             var totalBasePrice = books.Length * UnitPrice;
 
-            if ((books[0] == books[1]) && (books[1] == books[2]))
+            if ((books.Distinct().Count() == 2) && (books.Length == 4))
                 return 3 * 0.90 * UnitPrice + 1 * UnitPrice;
 
             if (books[0] == books[1])
