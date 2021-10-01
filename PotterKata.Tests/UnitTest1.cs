@@ -20,7 +20,6 @@ namespace PotterKata.Tests
             Assert.AreEqual(expected, new Basket().GetPrice(books));
         }
 
-        [Ignore("")]
         [TestCase(new int[] { 0, 0 }, 16, TestName = "2 identical books")]
         public void BookDuplicates(int[] books, double expected)
         {
