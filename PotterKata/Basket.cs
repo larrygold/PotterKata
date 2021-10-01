@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PotterKata
 {
@@ -6,13 +7,14 @@ namespace PotterKata
     {
         public double GetPrice(int[] books)
         {
+            if (books.All(book => book == books[0]))
+                return books.Length * 8.0;
 
             switch (books.Length)
             {
                 case 1:
                     return 8.0;
                 case 2:
-                    if (books[0] == books[1]) return 16.0;
                     return 15.2;
                 case 3:
                     return 21.6;

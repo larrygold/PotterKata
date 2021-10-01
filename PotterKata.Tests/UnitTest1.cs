@@ -15,13 +15,17 @@ namespace PotterKata.Tests
         [TestCase(new int[] {0, 1, 2}, 21.6, TestName = "3 books")]
         [TestCase(new int[] {0, 1, 2, 3}, 25.6, TestName = "4 books")]
         [TestCase(new int[] {0, 1, 2, 3, 4}, 30, TestName = "5 books")]
-        public void NoBookDuplicate(int[] books, double expected)
+        public void NoIdenticalBook(int[] books, double expected)
         {
             Assert.AreEqual(expected, new Basket().GetPrice(books));
         }
 
         [TestCase(new int[] { 0, 0 }, 16, TestName = "2 identical books")]
-        public void BookDuplicates(int[] books, double expected)
+        [TestCase(new int[] { 2, 2 }, 16, TestName = "2 identical books")]
+        [TestCase(new int[] { 0, 0, 0 }, 24, TestName = "3 identical books")]
+        [TestCase(new int[] { 0, 0, 0, 0 }, 32, TestName = "4 identical books")]
+        [TestCase(new int[] { 0, 0, 0, 0, 0 }, 40, TestName = "5 identical books")]
+        public void OnlyIdenticalBooks(int[] books, double expected)
         {
             Assert.AreEqual(expected, new Basket().GetPrice(books));
         }
