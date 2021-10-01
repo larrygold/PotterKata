@@ -9,10 +9,13 @@ namespace PotterKata.Tests
         {
         }
 
-        [TestCase(new int[] { 0 })]
-        public void NoBookDuplicate(int[] books)
+        [TestCase(new int[] { 0 }, 8)]
+        /*
+        [TestCase(new int[] {0, 1}, 15.2)]
+        */
+        public void NoBookDuplicate(int[] books, double expected)
         {
-            Assert.AreEqual(8, new Basket().GetPrice(books));
+            Assert.AreEqual(expected, new Basket().GetPrice(books));
         }
 
 

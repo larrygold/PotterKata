@@ -4,9 +4,9 @@ namespace PotterKata
 {
     public class Basket
     {
-        public int GetPrice(int[] books)
+        public double GetPrice(int[] books)
         {
-            return 8;
+            return 8.0;
         }
     }
 }
