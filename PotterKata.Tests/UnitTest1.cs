@@ -31,6 +31,7 @@ namespace PotterKata.Tests
         }
 
         [TestCase(new int[] { 0, 0, 1 }, 23.2, TestName = "2 identical + 1 non identical")]
+        [TestCase(new int[] { 0, 0, 0, 1 }, 29.6, TestName = "3 identical + 1 non identical")]
         public void BothIdenticalAndNonIdenticalBooks(int[] books, double expected)
         {
             Assert.AreEqual(expected, new Basket().GetPrice(books));

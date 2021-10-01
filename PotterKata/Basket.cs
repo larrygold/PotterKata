@@ -14,8 +14,12 @@ namespace PotterKata
 
             var totalBasePrice = books.Length * UnitPrice;
 
+            if ((books[0] == books[1]) && (books[1] == books[2]))
+                return 3 * 0.90 * UnitPrice + 1 * UnitPrice;
+
             if (books[0] == books[1])
                 return 2 * 0.95 * UnitPrice + 1 * UnitPrice;
+
 
             switch (books.Length)
             {
