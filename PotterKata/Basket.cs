@@ -17,7 +17,7 @@ namespace PotterKata
             if ((books.Distinct().Count() == 2) && (books.Length == 4))
                 return 3 * 0.90 * UnitPrice + 1 * UnitPrice;
 
-            if (books[0] == books[1])
+            if ((books.Distinct().Count() == 2) && (books.Length == 3))
                 return 2 * 0.95 * UnitPrice + 1 * UnitPrice;
 
 
