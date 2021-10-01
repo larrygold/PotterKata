@@ -40,6 +40,7 @@ namespace PotterKata.Tests
         }
 
         [TestCase(new int[] { 0, 0, 1, 1, 2 }, 37.6, TestName = "3 distinct incl. 2 books with repetition")]
+        [TestCase(new int[] { 0, 0, 1, 1, 2, 3 }, 37.6, TestName = "4 distinct incl. 2 books with repetition")]
         public void MoreThanTwoDistinctWithSeveralIdenticalBooks(int[] books, double expected)
         {
             Assert.AreEqual(expected, new Basket().GetPrice(books));

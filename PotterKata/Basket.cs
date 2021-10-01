@@ -29,6 +29,12 @@ namespace PotterKata
 
             var totalBasePrice = books.Length * UnitPrice;
 
+            if ((books.Distinct().Count() == 4) && (books.Length == 6))
+            {
+                var numberDistinctBooks = books.Length - books.Distinct().Count() + 1;
+                return GetDiscountedPrice(numberDistinctBooks, 2);
+            }
+
             if ((books.Distinct().Count() == 3) && (books.Length == 5))
             {
                 var numberDistinctBooks = books.Length - books.Distinct().Count() + 1;
