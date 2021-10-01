@@ -34,11 +34,16 @@ namespace PotterKata.Tests
         [TestCase(new int[] { 0, 0, 0, 1 }, 29.6, TestName = "3 identical + 1 non identical")]
         [TestCase(new int[] { 1, 0, 0, 0 }, 29.6, TestName = "3 identical + 1 non identical (other order)")]
         [TestCase(new int[] { 0, 0, 0, 0, 1 }, 33.6, TestName = "4 identical + 1 non identical")]
-        public void BothIdenticalAndNonIdenticalBooks(int[] books, double expected)
+        public void TwoDistinctWithSeveralIdenticalBooks(int[] books, double expected)
         {
             Assert.AreEqual(expected, new Basket().GetPrice(books));
         }
 
+        [TestCase(new int[] { 0, 0, 1, 1, 2 }, 37.6, TestName = "3 distinct incl. 2 books with repetition")]
+        public void MoreThanTwoDistinctWithSeveralIdenticalBooks(int[] books, double expected)
+        {
+            Assert.AreEqual(expected, new Basket().GetPrice(books));
+        }
 
 
     }

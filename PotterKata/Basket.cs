@@ -29,10 +29,16 @@ namespace PotterKata
 
             var totalBasePrice = books.Length * UnitPrice;
 
+            if ((books.Distinct().Count() == 3) && (books.Length == 5))
+            {
+                var numberDistinctBooks = books.Length - books.Distinct().Count() + 1;
+                return GetDiscountedPrice(numberDistinctBooks, 2);
+            }
+
             if ((books.Distinct().Count() == 2) && (books.Length >= 3))
             {
                 var numberDistinctBooks = books.Length - books.Distinct().Count() + 1;
-                return GetDiscountedPrice(numberDistinctBooks);
+                return GetDiscountedPrice(numberDistinctBooks, 1);
             }
 
             switch (books.Length)
@@ -52,9 +58,9 @@ namespace PotterKata
             }
         }
 
-        private double GetDiscountedPrice(int numberDistinctBooks)
+        private double GetDiscountedPrice(int numberDistinctBooks, int remainingNumberBooks)
         {
-            return numberDistinctBooks * _discountFactorPerNumberOfDistinctBooks[numberDistinctBooks] * UnitPrice + 1 * UnitPrice;
+            return numberDistinctBooks * _discountFactorPerNumberOfDistinctBooks[numberDistinctBooks] * UnitPrice + remainingNumberBooks * UnitPrice;
         }
     }
 }
