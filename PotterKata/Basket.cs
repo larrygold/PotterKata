@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PotterKata
@@ -13,9 +14,17 @@ namespace PotterKata
                 return books.Length * UnitPrice;
 
             var totalBasePrice = books.Length * UnitPrice;
+            var discountFactorPerNumberOfDistinctBooks = new Dictionary<int, double>()
+            {
+                { 1, 1.0 },
+                { 2, 0.95 },
+                { 3, 0.90 },
+                { 4, 0.80 },
+                { 5, 0.75 }
+            };
 
             if ((books.Distinct().Count() == 2) && (books.Length == 5))
-                return 4 * 0.80 * UnitPrice + 1 * UnitPrice;
+                return 4 * discountFactorPerNumberOfDistinctBooks[4] * UnitPrice + 1 * UnitPrice;
 
             if ((books.Distinct().Count() == 2) && (books.Length == 4))
                 return 3 * 0.90 * UnitPrice + 1 * UnitPrice;
