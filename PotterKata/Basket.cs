@@ -37,8 +37,8 @@ namespace PotterKata
 
             if ((books.Distinct().Count() == 2) && (books.Length == 3))
             {
-                var numberDistinctBooks = 2;
-                return numberDistinctBooks * _discountFactorPerNumberOfDistinctBooks[numberDistinctBooks] * UnitPrice + 1 * UnitPrice;
+                var numberDistinctBooks = books.Length - books.Distinct().Count() + 1;
+                return GetDiscountedPrice(numberDistinctBooks);
             }
 
             switch (books.Length)
@@ -56,6 +56,11 @@ namespace PotterKata
                 default:
                     throw new Exception();
             }
+        }
+
+        private double GetDiscountedPrice(int numberDistinctBooks)
+        {
+            return numberDistinctBooks * _discountFactorPerNumberOfDistinctBooks[numberDistinctBooks] * UnitPrice + 1 * UnitPrice;
         }
     }
 }
