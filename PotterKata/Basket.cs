@@ -27,14 +27,31 @@ namespace PotterKata
             if (books.All(book => book == books[0]))
                 return books.Length * UnitPrice;
 
-            var totalBasePrice = books.Length * UnitPrice;
-
-            var numberDistinctBooks = books.Length - books.Distinct().Count() + 1;
             if (books.Distinct().Count() != books.Length)
             {
-                return GetDiscountedPrice(numberDistinctBooks, books.Length - numberDistinctBooks);
+
+                var booksList = books.ToList();
+                var totalDiscountedPrice = 0.0;
+                var distinctBooks = booksList.Distinct().ToList();
+
+                while (distinctBooks.Any())
+                {
+                    totalDiscountedPrice += distinctBooks.Count() * _discountFactorPerNumberOfDistinctBooks[distinctBooks.Count()] * UnitPrice;
+                    foreach (var book in distinctBooks)
+                    {
+                        booksList.Remove(book);
+                    }
+                    distinctBooks = booksList.Distinct().ToList();
+                }
+
+                /*
+                totalDiscountedPrice += booksList.Count * UnitPrice;
+                */
+                return totalDiscountedPrice;
+
             }
 
+            var totalBasePrice = books.Length * UnitPrice;
             switch (books.Length)
             {
                 case 1:
@@ -50,11 +67,6 @@ namespace PotterKata
                 default:
                     throw new Exception();
             }
-        }
-
-        private double GetDiscountedPrice(int numberDistinctBooks, int remainingNumberBooks)
-        {
-            return numberDistinctBooks * _discountFactorPerNumberOfDistinctBooks[numberDistinctBooks] * UnitPrice + remainingNumberBooks * UnitPrice;
         }
     }
 }
