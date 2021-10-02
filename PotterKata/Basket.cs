@@ -24,48 +24,35 @@ namespace PotterKata
 
         public double GetPrice(int[] books)
         {
-            if (books.All(book => book == books[0]))
-                return books.Length * UnitPrice;
+            var booksList = books.ToList();
+            var totalDiscountedPrice = 0.0;
+            var distinctBooks = UpdateDistinctBooks(booksList);
 
-            if (books.Distinct().Count() != books.Length)
+            while (distinctBooks.Any())
             {
-
-                var booksList = books.ToList();
-                var totalDiscountedPrice = 0.0;
-                var distinctBooks = booksList.Distinct().ToList();
-
-                while (distinctBooks.Any())
-                {
-                    totalDiscountedPrice += distinctBooks.Count() * _discountFactorPerNumberOfDistinctBooks[distinctBooks.Count()] * UnitPrice;
-                    foreach (var book in distinctBooks)
-                    {
-                        booksList.Remove(book);
-                    }
-                    distinctBooks = booksList.Distinct().ToList();
-                }
-
-                /*
-                totalDiscountedPrice += booksList.Count * UnitPrice;
-                */
-                return totalDiscountedPrice;
-
+                totalDiscountedPrice += GetDiscountedPriceForDistinctBooks(distinctBooks);
+                UpdateBooksList(distinctBooks, booksList);
+                distinctBooks = UpdateDistinctBooks(booksList);
             }
 
-            var totalBasePrice = books.Length * UnitPrice;
-            switch (books.Length)
+            return totalDiscountedPrice;
+        }
+
+        private static List<int> UpdateDistinctBooks(List<int> booksList)
+        {
+            return booksList.Distinct().ToList();
+        }
+
+        private double GetDiscountedPriceForDistinctBooks(List<int> distinctBooks)
+        {
+            return distinctBooks.Count() * _discountFactorPerNumberOfDistinctBooks[distinctBooks.Count()] * UnitPrice;
+        }
+
+        private static void UpdateBooksList(List<int> distinctBooks, List<int> booksList)
+        {
+            foreach (var book in distinctBooks)
             {
-                case 1:
-                    return totalBasePrice;
-                case 2:
-                    return totalBasePrice * 0.95;
-                case 3:
-                    return totalBasePrice * 0.90;
-                case 4:
-                    return totalBasePrice * 0.80;
-                case 5:
-                    return totalBasePrice * 0.75;
-                default:
-                    throw new Exception();
+                booksList.Remove(book);
             }
         }
     }
